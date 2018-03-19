@@ -95,4 +95,26 @@ describe('Tama', function() {
     expect(newTama.stage).toEqual("child");
   });
 
+  it('should should get sick', function(){
+    newTama.dirty = true;
+    newTama.sick();
+    jasmine.clock().tick(120001);
+     expect(newTama.fever).toEqual(2)
+  });
+
+  it('should get better when its sick', function(){
+    newTama.fever = 1;
+    newTama.medicine()
+
+    expect(newTama.fever).toEqual(0);
+  });
+
+  it('should die if the temp. reaches 10', function(){
+    newTama.fever = 10;
+    newTama.dirty = true;
+    newTama.sick();
+
+    expect(newTama.dead).toEqual(true);
+  });
+
 });

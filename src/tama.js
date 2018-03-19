@@ -6,6 +6,7 @@ export class Tama {
     this.dead = false;
     this.dirty = false;
     this.stage = "baby";
+    this.fever = 0;
   }
   setFoodLevel(){
     setInterval(() => {
@@ -73,5 +74,20 @@ export class Tama {
     }
 
 
+  }
+  sick(){
+    if(this.dirty === true){
+      setInterval (() => {
+        this.fever ++;
+      }, 60000);
+
+    if(this.fever >= 10){
+      console.log();
+      this.dead = true;
+    }
+    }
+  }
+  medicine(){
+    this.fever --;
   }
 }
