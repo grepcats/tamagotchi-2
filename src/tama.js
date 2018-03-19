@@ -19,5 +19,15 @@ export class Tama {
     this.foodLevel += 2;
   }
 
+  play() {
+    this.happyLevel += 2;
+  }
+
+  cry() {
+    if (this.foodLevel <= 5 || this.happyLevel <= 5) {
+      return ("Pay attention to me!");
+    }
+  }
+
 
 }

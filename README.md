@@ -8,7 +8,7 @@
   * Output: food and happy levels decrement 1 every 10 seconds
 
 * The program should allow the user to feed the tama to increase food levels
-  * Input: feed blueberries
+  * Input: feed 
   * Output: Increased food levels (2?)
 
 * The program should allow the user to play with the tama to increase happy levels
@@ -22,4 +22,3 @@
 * If the user allows the food and happy levels to decrease to 0 for 1 minute, the tama will die
   * Input: food and happy levels = 0 for > 1 minute
   * Output: Ded
-  

@@ -32,4 +32,14 @@ describe('Tama', function() {
 
   });
 
+  it('should increase the happyLevel when they play with it', function() {
+    newTama.play();
+    expect(newTama.happyLevel).toEqual(12);
+  });
+
+  it('should cry when food or happy levels are below 50%', function() {
+    jasmine.clock().tick(50001);
+    expect(newTama.cry()).toEqual("Pay attention to me!");
+  });
+
 });
