@@ -13,14 +13,17 @@ export class Tama {
       if (this.foodLevel > 0) {
         this.foodLevel--;
       }
-    }, 10000);
+    }, 10000); //change this back to 10 seconds for passing tests
   }
   setHappyLevel(){
     setInterval(() => {
       if (this.happyLevel > 0) {
         this.happyLevel--;
+        return this.happyLevel;
       }
-    }, 10000);
+    }, 10000); //change this back to 10 seconds for passing tests
+
+    //setTimeout('document.getElementById("play-level").innerHTML = ""', 1000);
   }
 
   feed() {
@@ -49,7 +52,7 @@ export class Tama {
     if(this.foodLevel > 0){
       setInterval(() => {
         this.dirty = true;
-      }, 50000)
+      }, 50000) //change this back to 50000 for passing tests
     }
   }
 
@@ -67,11 +70,13 @@ export class Tama {
           stageIndex += 1;
         }
         this.stage = stages[stageIndex];
-      }, 60000);
+        if (this.stage === "adult" || this.foodLevel === 0) {
+          clearInterval(growthInterval)
+        }
+      }, 60000); //change this back to 60000 for passing tests
+
     }
-    if (this.stage === "adult" || this.foodLevel === 0) {
-      clearInterval(growthInterval)
-    }
+
 
 
   }
@@ -81,12 +86,13 @@ export class Tama {
         this.fever ++;
       }, 60000);
 
-    if(this.fever >= 10){
-      console.log();
-      this.dead = true;
-    }
+      if(this.fever >= 10){
+        console.log();
+        this.dead = true;
+      }
     }
   }
+
   medicine(){
     this.fever --;
   }

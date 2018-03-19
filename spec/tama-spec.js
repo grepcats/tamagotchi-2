@@ -72,9 +72,9 @@ describe('Tama', function() {
   });
 
   it('should stop growing once its an adult', function() {
-    newTama.stage = "adult";
+    newTama.stage = "teen";
     newTama.grow();
-    jasmine.clock().tick(60001);
+    jasmine.clock().tick(120001);
     expect(newTama.stage).toEqual("adult");
   });
 
