@@ -5,6 +5,7 @@ export class Tama {
     this.happyLevel = 10;
     this.dead = false;
     this.dirty = false;
+    this.stage = "baby";
   }
   setFoodLevel(){
     setInterval(() => {
@@ -42,6 +43,7 @@ export class Tama {
       }, 60000);
     }
   }
+
   poop() {
     if(this.foodLevel > 0){
       setInterval(() => {
@@ -52,5 +54,24 @@ export class Tama {
 
   clean() {
     this.dirty = false;
+  }
+
+  grow() {
+    let stages = ["baby", "child", "teen", "adult"];
+    let stageIndex = stages.indexOf(this.stage);
+    let growthInterval;
+    if (this.stage != "adult") {
+        growthInterval = setInterval(() => {
+        if (this.foodLevel != 0) {
+          stageIndex += 1;
+        }
+        this.stage = stages[stageIndex];
+      }, 60000);
+    }
+    if (this.stage === "adult" || this.foodLevel === 0) {
+      clearInterval(growthInterval)
+    }
+
+
   }
 }

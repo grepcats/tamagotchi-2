@@ -65,4 +65,34 @@ describe('Tama', function() {
     expect(newTama.dirty).toEqual(false);
   });
 
+  it('should allow tamagotchi to grow a stage every minute', function() {
+    newTama.grow();
+    jasmine.clock().tick(60001);
+    expect(newTama.stage).toEqual("child");
+  });
+
+  it('should stop growing once its an adult', function() {
+    newTama.stage = "adult";
+    newTama.grow();
+    jasmine.clock().tick(60001);
+    expect(newTama.stage).toEqual("adult");
+  });
+
+  it('should stop growing if food level reaches 0', function() {
+    newTama.foodLevel = 2;
+    newTama.grow();
+    jasmine.clock().tick(60001);
+    expect(newTama.stage).toEqual("baby");
+  });
+
+  it('should restart growth at the same stage once fed', function() {
+    newTama.foodLevel = 2;
+    newTama.grow();
+    jasmine.clock().tick(60001);
+    newTama.foodLevel = 10;
+    newTama.grow();
+    jasmine.clock().tick(60001);
+    expect(newTama.stage).toEqual("child");
+  });
+
 });

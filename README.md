@@ -8,7 +8,7 @@
   * Output: food and happy levels decrement 1 every 10 seconds
 
 * The program should allow the user to feed the tama to increase food levels
-  * Input: feed 
+  * Input: feed
   * Output: Increased food levels (2?)
 
 * The program should allow the user to play with the tama to increase happy levels
@@ -22,3 +22,11 @@
 * If the user allows the food and happy levels to decrease to 0 for 1 minute, the tama will die
   * Input: food and happy levels = 0 for > 1 minute
   * Output: Ded
+
+* If the tamagotchi has a food level of > 0, it will poop every 5 seconds
+  * Input: food level > 0 and every 5 seconds
+  * Output: Tama will become dirty
+
+* Program should allow user to clean tamagotchi when they are dirty
+  * Input: clean method
+  * Output: tamagotchi dirty attribute = false
