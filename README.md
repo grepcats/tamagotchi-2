@@ -30,3 +30,19 @@
 * Program should allow user to clean tamagotchi when they are dirty
   * Input: clean method
   * Output: tamagotchi dirty attribute = false
+
+* Program should allow tamagotchi to grow at regular intervals given tama is kept fed
+  * Input: tama with foodlevel > 0 grows a stage every minute
+  * Output: tama moves through stages (baby, child, teen, adult)
+
+* Program should stop tama growth if food level reaches zero
+  * Input: tama at baby stage with food level 0
+  * Output: tama stays at baby stage despite time passage of a minute
+
+* Program should prevent tama from aging past adulthood
+  * Input: tama at adult stage (3)
+  * Output: clearInterval
+
+* Program should restart growth at the same stage if growth is stopped and food is resumed
+  * Input: tama at baby stage stops growth and then is fed again
+  * Output: tama reaches child stage after a minute
