@@ -95,7 +95,7 @@ describe('Tama', function() {
     expect(newTama.stage).toEqual("child");
   });
 
-  it('should should get sick', function(){
+  it('should get sick', function(){
     newTama.dirty = true;
     newTama.sick();
     jasmine.clock().tick(120001);

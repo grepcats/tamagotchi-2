@@ -44,16 +44,18 @@ export class Tama {
     if (this.foodLevel === 0 && this.happyLevel === 0) {
       setTimeout(() => {
         this.dead = true;
-      }, 60000);
+      }, 60000); //change back to 60000 for passing tests
     }
   }
 
   poop() {
+    let sickInterval;
     if(this.foodLevel > 0){
       setInterval(() => {
         this.dirty = true;
       }, 50000) //change this back to 50000 for passing tests
     }
+
   }
 
   clean() {
@@ -87,7 +89,6 @@ export class Tama {
       }, 60000);
 
       if(this.fever >= 10){
-        console.log();
         this.dead = true;
       }
     }

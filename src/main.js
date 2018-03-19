@@ -16,6 +16,7 @@ $(document).ready(function(){
     $(".output").append("<p class='food'>Food Level: " + newTama.foodLevel + "</p>")
     $(".output").append("<p class='happy'>Happy Level: " + newTama.happyLevel + "</p>")
     $(".output").append("<p class='poop'>Pooped: " + newTama.dirty + "</p>")
+    $(".output").append("<p class='dead'>Dead: " + newTama.dead + "</p>")
 
     $("#feed").click(function() {
       newTama.feed();
@@ -30,15 +31,24 @@ $(document).ready(function(){
     $("#clean").click(function() {
       newTama.clean();
       $(".poop").html("<p class='poop'>Pooped: " + newTama.dirty + "</p>")
-
     });
 
+    // $("#medicate").click(function() {
+    //   newTama.medicine();
+    //   $(".sick").html("<p class='sick'>Sick level: " + newTama.fever + "</p>")
+    //
+    // });
+
     $("#update").click(function() {
+      newTama.die();
       $(".output p").remove();
       $(".output").append("<p class='stage'>" + newTama.name + " is a " + newTama.stage + "</p>")
       $(".output").append("<p class='food'>Food Level: " + newTama.foodLevel + "</p>")
       $(".output").append("<p class='happy'>Happy Level: " + newTama.happyLevel + "</p>")
       $(".output").append("<p class='poop'>Pooped: " + newTama.dirty + "</p>")
+      // $(".output").append("<p class='sick'>Sick level: " + newTama.fever + "</p>")
+      $(".output").append("<p class='dead'>Dead: " + newTama.dead + "</p>")
+
     });
 
   });
