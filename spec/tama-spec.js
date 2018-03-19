@@ -50,4 +50,19 @@ describe('Tama', function() {
     expect(newTama.dead).toEqual(true);
   });
 
+  it('it should poop every 5 seconds after it eats', function() {
+    newTama.foodLevel = 5;
+    newTama.poop();
+    jasmine.clock().tick(50001);
+    expect(newTama.dirty).toEqual(true);
+  });
+
+  it('should clean tamagotchi, setting dirty to false', function() {
+    newTama.poop();
+    jasmine.clock().tick(50001);
+    newTama.clean();
+
+    expect(newTama.dirty).toEqual(false);
+  });
+
 });

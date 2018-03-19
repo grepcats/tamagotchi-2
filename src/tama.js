@@ -4,6 +4,7 @@ export class Tama {
     this.foodLevel = 10;
     this.happyLevel = 10;
     this.dead = false;
+    this.dirty = false;
   }
   setFoodLevel(){
     setInterval(() => {
@@ -41,6 +42,15 @@ export class Tama {
       }, 60000);
     }
   }
+  poop() {
+    if(this.foodLevel > 0){
+      setInterval(() => {
+        this.dirty = true;
+      }, 50000)
+    }
+  }
 
-
+  clean() {
+    this.dirty = false;
+  }
 }
