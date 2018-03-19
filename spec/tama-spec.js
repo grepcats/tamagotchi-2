@@ -42,4 +42,12 @@ describe('Tama', function() {
     expect(newTama.cry()).toEqual("Pay attention to me!");
   });
 
+  it('should die if food and happy levels remain at 0 for a minute', function() {
+    newTama.foodLevel = 0;
+    newTama.happyLevel = 0;
+    newTama.die();
+    jasmine.clock().tick(60001);
+    expect(newTama.dead).toEqual(true);
+  });
+
 });

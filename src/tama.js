@@ -3,15 +3,20 @@ export class Tama {
     this.name = name;
     this.foodLevel = 10;
     this.happyLevel = 10;
+    this.dead = false;
   }
   setFoodLevel(){
     setInterval(() => {
-      this.foodLevel--;
+      if (this.foodLevel > 0) {
+        this.foodLevel--;
+      }
     }, 10000);
   }
   setHappyLevel(){
     setInterval(() => {
-      this.happyLevel--;
+      if (this.happyLevel > 0) {
+        this.happyLevel--;
+      }
     }, 10000);
   }
 
@@ -26,6 +31,14 @@ export class Tama {
   cry() {
     if (this.foodLevel <= 5 || this.happyLevel <= 5) {
       return ("Pay attention to me!");
+    }
+  }
+
+  die() {
+    if (this.foodLevel === 0 && this.happyLevel === 0) {
+      setTimeout(() => {
+        this.dead = true;
+      }, 60000);
     }
   }
 
