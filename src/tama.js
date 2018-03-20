@@ -89,6 +89,7 @@ export class Tama {
 
   grow() {
     let stages = ["baby", "child", "teen", "adult"];
+
     let stageIndex = stages.indexOf(this.stage);
     let growthInterval;
     if (this.stage != "adult") {

@@ -7,25 +7,33 @@ import './styles.css';
 
 $(document).ready(function(){
   //API call
-  $.ajax({
-    url: `http://api.giphy.com/v1/gifs/l07qxaQ4Wj3qw?api_key=${process.env.API_KEY}`,
-    type: 'GET',
-    data: {
-      format: 'json'
-    },
-    success: function(response) {
-      $(".pictures").append(`<p>The picture id is: ${response.data.id}</p>` );
-      $(".pictures").append(`<img src="${response.data.embed_url}"/>`);
-      $(".pictures").append("<img src='./img/test.gif'>");
-    }
-  });
-
 
 
   $("#create-tama").submit(function(event) {
     event.preventDefault();
-
+//api.giphy.com/v1/gifs?ids=ALyYKLZO9kMMM,S0saIQAGkcKYw,RUTAB8G4u9XHi,Ftdn5h5qNIKJO,oAPJaYnKwiFsA&api_key=Pyfca45HDhNztmX6olLoSLDi0gIBwiDr
     let newTama = new Tama($("#name").val());
+    let eggImg;
+    let babyImg;
+    let childImg;
+    let teenImg;
+    let adultImg;
+    $.ajax({
+      url: `http://api.giphy.com/v1/gifs?ids=ALyYKLZO9kMMM,S0saIQAGkcKYw,RUTAB8G4u9XHi,Ftdn5h5qNIKJO,oAPJaYnKwiFsA&api_key=${process.env.API_KEY}`,
+      type: 'GET',
+      data: {
+        format: 'json'
+      },
+      success: function(response) {
+        //$(".pictures").append(`<p>The picture id is: ${response.data.id}</p>` );
+        eggImg = response.data[0].images.original.url;
+        babyImg = response.data[1].images.original.url;
+        childImg = response.data[2].images.original.url;
+        teenImg = response.data[3].images.original.url;
+        adultImg = response.data[4].images.original.url;
+        $(".pictures").html('<img src="' + eggImg + '"/>');
+      }
+    });
   //  newTama.setFoodLevel();
     //newTama.setHappyLevel();
     newTama.poop();
@@ -40,6 +48,17 @@ $(document).ready(function(){
       $(".output").append("<p class='poop'>Pooped: " + newTama.dirty + "</p>")
       $(".output").append("<p class='dead'>Dead: " + newTama.dead + "</p>")
       $(".output").append("<p class='sick'>Sick: " + newTama.fever + "</p>")
+
+
+      if (newTama.stage === "baby") {
+        $(".pictures").html('<img src="' + babyImg + '"/>');
+      } else if (newTama.stage === "child") {
+        $(".pictures").html('<img src="' + childImg + '"/>');
+      } else if (newTama.stage === "teen") {
+        $(".pictures").html('<img src="' + teenImg + '"/>');
+      } else {
+        $(".pictures").html('<img src="' + adultImg + '"/>');
+      }
 
       if (newTama.foodLevel === 0 && newTama.happyLevel === 0 && setDeathCounter === false) {
         setDeathCounter = true;
