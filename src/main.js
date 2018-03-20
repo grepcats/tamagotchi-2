@@ -2,8 +2,26 @@ import { Tama } from './tama.js';
 import './styles.css';
 
 //process.env.API_KEY
+//api.giphy.com
+//api.giphy.com/v1/gifs/l07qxaQ4Wj3qw?api_key=process.env.API_KEY
 
 $(document).ready(function(){
+  //API call
+  $.ajax({
+    url: `http://api.giphy.com/v1/gifs/l07qxaQ4Wj3qw?api_key=${process.env.API_KEY}`,
+    type: 'GET',
+    data: {
+      format: 'json'
+    },
+    success: function(response) {
+      $(".pictures").append(`<p>The picture id is: ${response.data.id}</p>` );
+      $(".pictures").append(`<img src="${response.data.embed_url}"/>`);
+      $(".pictures").append("<img src='./img/test.gif'>");
+    }
+  });
+
+
+
   $("#create-tama").submit(function(event) {
     event.preventDefault();
 
@@ -12,6 +30,8 @@ $(document).ready(function(){
     newTama.setHappyLevel();
     newTama.poop();
     newTama.grow();
+
+
 
 
     $(".output").append("<p class='stage'>" + newTama.name + " is a " + newTama.stage + "</p>")

@@ -2,7 +2,6 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
 const Dotenv = require('dotenv-webpack');
 
 module.exports = {
@@ -14,20 +13,17 @@ module.exports = {
   devtool: 'eval-source-map',
   devServer: {
     contentBase: './dist'
-  },
+  }, //devServer
   plugins: [
-    new CopyWebpackPlugin([
-      {from:'./src/img',to:'images'}
-    ]),
     new UglifyJsPlugin({ sourceMap: true }),
     new CleanWebpackPlugin(['dist']),
     new HtmlWebpackPlugin({
-      title: 'galactic-age-calculator',
+      title: 'tamagotchi',
       template: './src/index.html',
       inject: 'body'
     }),
     new Dotenv()
-  ],
+  ], // plugins
   module: {
     rules: [
       {
@@ -35,23 +31,11 @@ module.exports = {
         use: [
           'style-loader',
           'css-loader'
-        ]
-      },
-      {
-        test: /\.(gif|png|jpe?g|svg)$/i, // image code
-        use: [
-          'file-loader',
-          {
-            loader: 'image-webpack-loader', // image code
-            options: {
-              bypassOnDebug: true,
-            },
-          },
-        ],
-      },
+        ] // use
+      }, // css
       {
         test: /\.js$/,
-        exclude:[
+        exclude: [
           /node_modules/,
           /spec/
         ],
@@ -63,11 +47,33 @@ module.exports = {
           /node_modules/,
           /spec/
         ],
-        loader:'babel-loader',
+        loader: "babel-loader",
         options: {
           presets: ['es2015']
         }
-      }
-    ]
-  }
-};
+      }, //babel
+      {
+         test: /\.(png|jp(e*)g|svg|gif)$/,
+         use: [{
+             loader: 'url-loader',
+             options: {
+                 limit: 8000, // Convert images < 8kb to base64 strings
+                 name: 'images/[hash]-[name].[ext]'
+             }
+         }]
+       }, //url-loader
+       {
+         test: /\.(gif|png|jpe?g|svg)$/i,
+          use: [
+            'file-loader',
+            {
+              loader: 'image-webpack-loader',
+              options: {
+                bypassOnDebug: true,
+              },
+            },
+          ],
+       } //file-loader
+    ] // rules
+  } // module
+}; // module.exports
