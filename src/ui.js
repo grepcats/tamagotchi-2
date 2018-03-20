@@ -1,11 +1,25 @@
 export function updateUI(tama) {
   $(".output p").remove();
-  $(".output").append("<p class='stage'>" + tama.name + " is a " + tama.stage + "</p>")
+  if (tama.dead === true) {
+    $(".output").append("<p class='stage'>" + tama.name + " is dead.</p>")
+  } else if (tama.dead === false) {
+    $(".output").append("<p class='stage'>" + tama.name + " is a " + tama.stage + "</p>")
+  }
   $(".output").append("<p class='food'>Food Level: " + tama.foodLevel + "</p>")
   $(".output").append("<p class='happy'>Happy Level: " + tama.happyLevel + "</p>")
-  $(".output").append("<p class='poop'>Pooped: " + tama.dirty + "</p>")
-  $(".output").append("<p class='dead'>Dead: " + tama.dead + "</p>")
-  $(".output").append("<p class='sick'>Sick: " + tama.fever + "</p>")
+  if (tama.dirty === true) {
+    $(".output").append("<p class='poop'>" + tama.name + " pooped!</p>")
+  } else if (tama.dirty === false) {
+    $(".output").append("<p class='poop'>No poop here</p>")
+  }
+//$(".output").append("<p class='dead'>Dead: " + tama.dead + "</p>")
+ if (tama.fever > 0) {
+   $(".output").append("<p class='sick'>" + tama.name + " is sick!</p>")
+ }
+ else if (tama.fever === 0) {
+   $(".output").append("<p class='sick'>Healthy</p>")
+ }
+
 }
 
 // export function getImg(stage) {

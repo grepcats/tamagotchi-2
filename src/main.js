@@ -7,14 +7,14 @@ import './styles.css';
 //api.giphy.com/v1/gifs/l07qxaQ4Wj3qw?api_key=process.env.API_KEY
 
 $(document).ready(function(){
-  //API call
+
 
 
   $("#create-tama").submit(function(event) {
     event.preventDefault();
 
+
     let newTama = new Tama($("#name").val());
-    debugger;
     let eggImg;
     let babyImg;
     let childImg;
@@ -47,9 +47,8 @@ $(document).ready(function(){
 
 
     let mainInterval = setInterval(() => {
-      if (!newTama.dead) {
         updateUI(newTama);
-      }
+      
 
 
       if (newTama.stage === "baby") {
@@ -94,12 +93,16 @@ $(document).ready(function(){
 
     $("#clean").click(function() {
       newTama.clean();
-      $(".poop").html("<p class='poop'>Pooped: " + newTama.dirty + "</p>")
+      $(".poop").html("<p class='poop'>No poop here</p>")
     });
 
     $("#medicate").click(function() {
       newTama.medicine();
-      $(".sick").html("<p class='sick'>Sick: " + newTama.fever + "</p>")
+      if (newTama.fever === 0) {
+        $(".sick").html("<p class='sick'>Healthy</p>")
+      } else {
+        $(".sick").html("<p class='sick'>" + newTama.name + " is sick!</p>")
+      }
 
     });
 

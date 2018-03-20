@@ -51,7 +51,7 @@ export class Tama {
       console.log("death timeout started")
       deathTimeout = setTimeout(() => {
         this.dead = true;
-        $(".output p").remove();
+        //$(".output p").remove();
       }, 10000); //change back to 60000 for passing tests
     }
 

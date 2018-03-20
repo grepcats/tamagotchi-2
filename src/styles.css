@@ -6,9 +6,54 @@
   margin-top: 20px;
 }
 body{
-  background-color: skyblue;
+  background-color: #86BBD8;
 }
 
 img {
   width: 300px;
+}
+
+.stage {
+  font-size: 3em;
+  background-color: #33658A;
+  border-radius: 10px;
+  color: #86BBD8;
+  text-align:center;
+}
+
+.food {
+  font-size: 3em;
+  background-color: #ED7B84;
+  border-radius: 10px;
+  color: #F5DBCB;
+  text-align:center;
+}
+
+.happy {
+  font-size: 3em;
+  background-color: #33658A;
+  border-radius: 10px;
+  color: #86BBD8;
+  text-align:center;
+}
+
+.poop {
+  font-size: 3em;
+  background-color: #ED7B84;
+  border-radius: 10px;
+  color: #F5DBCB;
+  text-align:center;
+}
+
+.sick {
+  font-size: 3em;
+  background-color: #33658A;
+  border-radius: 10px;
+  color: #86BBD8;
+  text-align:center;
+}
+
+h2 {
+  font-size: 5em;
+  text-align: center;
 }
