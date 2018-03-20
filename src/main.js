@@ -1,6 +1,8 @@
 import { Tama } from './tama.js';
 import './styles.css';
 
+//process.env.API_KEY
+
 $(document).ready(function(){
   $("#create-tama").submit(function(event) {
     event.preventDefault();
