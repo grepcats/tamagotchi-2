@@ -56,6 +56,9 @@ $(document).ready(function(){
 
     $("#feed").click(function() {
       newTama.feed();
+      if (newTama.foodLevel === 2 ) {
+        newTama.poop();
+      }
       $(".food").html("<p class='food'>Food Level: " + newTama.foodLevel + "</p>");
     });
 
@@ -74,18 +77,6 @@ $(document).ready(function(){
     //   $(".sick").html("<p class='sick'>Sick level: " + newTama.fever + "</p>")
     //
     // });
-
-    $("#update").click(function() {
-      newTama.die();
-      $(".output p").remove();
-      $(".output").append("<p class='stage'>" + newTama.name + " is a " + newTama.stage + "</p>")
-      $(".output").append("<p class='food'>Food Level: " + newTama.foodLevel + "</p>")
-      $(".output").append("<p class='happy'>Happy Level: " + newTama.happyLevel + "</p>")
-      $(".output").append("<p class='poop'>Pooped: " + newTama.dirty + "</p>")
-      // $(".output").append("<p class='sick'>Sick level: " + newTama.fever + "</p>")
-      $(".output").append("<p class='dead'>Dead: " + newTama.dead + "</p>")
-
-    });
 
   });
 

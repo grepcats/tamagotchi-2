@@ -46,7 +46,7 @@ export class Tama {
     if (status === "dead") {
       this.dead = true;
     }
-    
+
     if (status === "dying") {
       console.log("death timeout started")
       deathTimeout = setTimeout(() => {
@@ -58,17 +58,20 @@ export class Tama {
       clearTimeout(deathTimeout);
       console.log("death timeout stopped")
     }
-
   }
 
-
-
   poop() {
-    let sickInterval;
+    let poopInterval;
     if(this.foodLevel > 0){
-      setInterval(() => {
+      console.log("poopinterval started")
+      poopInterval = setInterval(() => {
         this.dirty = true;
-      }, 50000) //change this back to 50000 for passing tests
+
+        if (this.foodLevel === 0) {
+          clearInterval(poopInterval);
+          console.log("poopinterval cleared")
+        }
+      }, 5000) //change this back to 50000 for passing tests
     }
 
   }
@@ -90,7 +93,7 @@ export class Tama {
         if (this.stage === "adult" || this.foodLevel === 0) {
           clearInterval(growthInterval)
         }
-      }, 60000); //change this back to 60000 for passing tests
+      }, 10000); //change this back to 60000 for passing tests
 
     }
 
