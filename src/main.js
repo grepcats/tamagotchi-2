@@ -18,8 +18,9 @@ $(document).ready(function(){
     let childImg;
     let teenImg;
     let adultImg;
+    let deadImg;
     $.ajax({
-      url: `http://api.giphy.com/v1/gifs?ids=ALyYKLZO9kMMM,S0saIQAGkcKYw,RUTAB8G4u9XHi,Ftdn5h5qNIKJO,oAPJaYnKwiFsA&api_key=${process.env.API_KEY}`,
+      url: `http://api.giphy.com/v1/gifs?ids=ALyYKLZO9kMMM,S0saIQAGkcKYw,RUTAB8G4u9XHi,Ftdn5h5qNIKJO,oAPJaYnKwiFsA,jagjooUaC4wqQ&api_key=${process.env.API_KEY}`,
       type: 'GET',
       data: {
         format: 'json'
@@ -31,13 +32,16 @@ $(document).ready(function(){
         childImg = response.data[2].images.original.url;
         teenImg = response.data[3].images.original.url;
         adultImg = response.data[4].images.original.url;
+        deadImg = response.data[5].images.original.url;
         $(".pictures").html('<img src="' + eggImg + '"/>');
+
       }
     });
-  //  newTama.setFoodLevel();
-    //newTama.setHappyLevel();
+    newTama.setFoodLevel();
+    newTama.setHappyLevel();
     newTama.poop();
     newTama.grow();
+
     let setDeathCounter = false;
 
     setInterval(() => {
@@ -58,6 +62,9 @@ $(document).ready(function(){
         $(".pictures").html('<img src="' + teenImg + '"/>');
       } else {
         $(".pictures").html('<img src="' + adultImg + '"/>');
+      }
+      if (newTama.dead === true) {
+        $(".pictures").html('<img src="' + deadImg + '"/>');
       }
 
       if (newTama.foodLevel === 0 && newTama.happyLevel === 0 && setDeathCounter === false) {
