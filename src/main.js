@@ -30,15 +30,29 @@ $(document).ready(function(){
     newTama.setHappyLevel();
     newTama.poop();
     newTama.grow();
+    let setDeathCounter = false;
+
+    setInterval(() => {
+      $(".output p").remove();
+      $(".output").append("<p class='stage'>" + newTama.name + " is a " + newTama.stage + "</p>")
+      $(".output").append("<p class='food'>Food Level: " + newTama.foodLevel + "</p>")
+      $(".output").append("<p class='happy'>Happy Level: " + newTama.happyLevel + "</p>")
+      $(".output").append("<p class='poop'>Pooped: " + newTama.dirty + "</p>")
+      $(".output").append("<p class='dead'>Dead: " + newTama.dead + "</p>")
+
+      if (newTama.foodLevel === 0 && newTama.happyLevel === 0 && setDeathCounter === false) {
+        setDeathCounter = true;
+        newTama.lifeStatus("dying");
+      }
+
+      if (newTama.foodLevel > 0 && newTama.happyLevel > 0 && setDeathCounter === true) {
+        console.log(setDeathCounter);
+        setDeathCounter = false;
+        newTama.lifeStatus("alive");
+      }
+    }, 1000);
 
 
-
-
-    $(".output").append("<p class='stage'>" + newTama.name + " is a " + newTama.stage + "</p>")
-    $(".output").append("<p class='food'>Food Level: " + newTama.foodLevel + "</p>")
-    $(".output").append("<p class='happy'>Happy Level: " + newTama.happyLevel + "</p>")
-    $(".output").append("<p class='poop'>Pooped: " + newTama.dirty + "</p>")
-    $(".output").append("<p class='dead'>Dead: " + newTama.dead + "</p>")
 
     $("#feed").click(function() {
       newTama.feed();

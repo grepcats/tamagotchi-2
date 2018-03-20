@@ -1,3 +1,5 @@
+let deathTimeout;
+
 export class Tama {
   constructor(name) {
     this.name = name;
@@ -13,7 +15,7 @@ export class Tama {
       if (this.foodLevel > 0) {
         this.foodLevel--;
       }
-    }, 10000); //change this back to 10 seconds for passing tests
+    }, 1000); //change this back to 10 seconds for passing tests
   }
   setHappyLevel(){
     setInterval(() => {
@@ -21,9 +23,8 @@ export class Tama {
         this.happyLevel--;
         return this.happyLevel;
       }
-    }, 10000); //change this back to 10 seconds for passing tests
+    }, 1000); //change this back to 10 seconds for passing tests
 
-    //setTimeout('document.getElementById("play-level").innerHTML = ""', 1000);
   }
 
   feed() {
@@ -40,13 +41,27 @@ export class Tama {
     }
   }
 
-  die() {
-    if (this.foodLevel === 0 && this.happyLevel === 0) {
-      setTimeout(() => {
-        this.dead = true;
-      }, 60000); //change back to 60000 for passing tests
+
+  lifeStatus(status) {
+    if (status === "dead") {
+      this.dead = true;
     }
+    
+    if (status === "dying") {
+      console.log("death timeout started")
+      deathTimeout = setTimeout(() => {
+        this.dead = true;
+      }, 10000); //change back to 60000 for passing tests
+    }
+
+    if (status === "alive") {
+      clearTimeout(deathTimeout);
+      console.log("death timeout stopped")
+    }
+
   }
+
+
 
   poop() {
     let sickInterval;
