@@ -26,8 +26,8 @@ $(document).ready(function(){
     event.preventDefault();
 
     let newTama = new Tama($("#name").val());
-    newTama.setFoodLevel();
-    newTama.setHappyLevel();
+  //  newTama.setFoodLevel();
+    //newTama.setHappyLevel();
     newTama.poop();
     newTama.grow();
     let setDeathCounter = false;
@@ -39,6 +39,7 @@ $(document).ready(function(){
       $(".output").append("<p class='happy'>Happy Level: " + newTama.happyLevel + "</p>")
       $(".output").append("<p class='poop'>Pooped: " + newTama.dirty + "</p>")
       $(".output").append("<p class='dead'>Dead: " + newTama.dead + "</p>")
+      $(".output").append("<p class='sick'>Sick: " + newTama.fever + "</p>")
 
       if (newTama.foodLevel === 0 && newTama.happyLevel === 0 && setDeathCounter === false) {
         setDeathCounter = true;
@@ -50,15 +51,15 @@ $(document).ready(function(){
         setDeathCounter = false;
         newTama.lifeStatus("alive");
       }
-    }, 1000);
+    }, 750);
 
 
 
     $("#feed").click(function() {
-      newTama.feed();
-      if (newTama.foodLevel === 2 ) {
+      if (newTama.foodLevel === 0 ) {
         newTama.poop();
       }
+      newTama.feed();
       $(".food").html("<p class='food'>Food Level: " + newTama.foodLevel + "</p>");
     });
 
@@ -72,11 +73,11 @@ $(document).ready(function(){
       $(".poop").html("<p class='poop'>Pooped: " + newTama.dirty + "</p>")
     });
 
-    // $("#medicate").click(function() {
-    //   newTama.medicine();
-    //   $(".sick").html("<p class='sick'>Sick level: " + newTama.fever + "</p>")
-    //
-    // });
+    $("#medicate").click(function() {
+      newTama.medicine();
+      $(".sick").html("<p class='sick'>Sick: " + newTama.fever + "</p>")
+
+    });
 
   });
 
