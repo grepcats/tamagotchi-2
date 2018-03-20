@@ -51,6 +51,7 @@ export class Tama {
       console.log("death timeout started")
       deathTimeout = setTimeout(() => {
         this.dead = true;
+        $(".output p").remove();
       }, 10000); //change back to 60000 for passing tests
     }
 
@@ -66,10 +67,10 @@ export class Tama {
     if(this.foodLevel > 0){
       console.log("poopinterval started")
       poopInterval = setInterval(() => {
+        if (this.dirty === false && sickStart === true) {
+            sickStart = false;
+          }
         this.dirty = true;
-        if (this.fever === 0 && sickStart === true) {
-          sickStart = false;
-        }
         if (!sickStart) {
           sickStart = true;
           console.log("sick has started")
@@ -79,7 +80,7 @@ export class Tama {
           clearInterval(poopInterval);
           console.log("poopinterval cleared")
         }
-      }, 5000) //change this back to 50000 for passing tests
+      }, 10000) //change this back to 50000 for passing tests
     }
   }
 
@@ -110,22 +111,21 @@ export class Tama {
   }
   sick(){
     let sickInterval;
-    if(this.dirty === true){
-      sickInterval = setInterval (() => {
+    sickInterval = setInterval (() => {
+
+      if (this.dirty === false) {
+        clearInterval(sickInterval);
+        console.log("sick was stopped")
+      }
+      if(this.fever >= 10){
+        clearInterval(sickInterval)
+        this.dead = true;
+      }
+      if (this.dirty === true) {
         this.fever++;
-        if (this.dirty === false) {
-          clearInterval(sickInterval);
-          console.log("sick was stopped")
-        }
+      }
+    }, 3000);
 
-        if(this.fever >= 10){
-          clearInterval(sickInterval)
-          this.dead = true;
-        }
-      }, 3000);
-
-
-    }
   }
 
   medicine(){

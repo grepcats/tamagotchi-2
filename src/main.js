@@ -1,4 +1,5 @@
 import { Tama } from './tama.js';
+import { updateUI } from './ui.js';
 import './styles.css';
 
 //process.env.API_KEY
@@ -11,8 +12,9 @@ $(document).ready(function(){
 
   $("#create-tama").submit(function(event) {
     event.preventDefault();
-//api.giphy.com/v1/gifs?ids=ALyYKLZO9kMMM,S0saIQAGkcKYw,RUTAB8G4u9XHi,Ftdn5h5qNIKJO,oAPJaYnKwiFsA&api_key=Pyfca45HDhNztmX6olLoSLDi0gIBwiDr
+
     let newTama = new Tama($("#name").val());
+    debugger;
     let eggImg;
     let babyImg;
     let childImg;
@@ -26,7 +28,6 @@ $(document).ready(function(){
         format: 'json'
       },
       success: function(response) {
-        //$(".pictures").append(`<p>The picture id is: ${response.data.id}</p>` );
         eggImg = response.data[0].images.original.url;
         babyImg = response.data[1].images.original.url;
         childImg = response.data[2].images.original.url;
@@ -44,14 +45,11 @@ $(document).ready(function(){
 
     let setDeathCounter = false;
 
-    setInterval(() => {
-      $(".output p").remove();
-      $(".output").append("<p class='stage'>" + newTama.name + " is a " + newTama.stage + "</p>")
-      $(".output").append("<p class='food'>Food Level: " + newTama.foodLevel + "</p>")
-      $(".output").append("<p class='happy'>Happy Level: " + newTama.happyLevel + "</p>")
-      $(".output").append("<p class='poop'>Pooped: " + newTama.dirty + "</p>")
-      $(".output").append("<p class='dead'>Dead: " + newTama.dead + "</p>")
-      $(".output").append("<p class='sick'>Sick: " + newTama.fever + "</p>")
+
+    let mainInterval = setInterval(() => {
+      if (!newTama.dead) {
+        updateUI(newTama);
+      }
 
 
       if (newTama.stage === "baby") {
@@ -65,6 +63,8 @@ $(document).ready(function(){
       }
       if (newTama.dead === true) {
         $(".pictures").html('<img src="' + deadImg + '"/>');
+        clearInterval(mainInterval);
+
       }
 
       if (newTama.foodLevel === 0 && newTama.happyLevel === 0 && setDeathCounter === false) {
@@ -77,9 +77,7 @@ $(document).ready(function(){
         setDeathCounter = false;
         newTama.lifeStatus("alive");
       }
-    }, 750);
-
-
+    }, 1000);
 
     $("#feed").click(function() {
       if (newTama.foodLevel === 0 ) {

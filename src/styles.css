@@ -5,3 +5,10 @@
 .output {
   margin-top: 20px;
 }
+body{
+  background-color: skyblue;
+}
+
+img {
+  width: 300px;
+}
